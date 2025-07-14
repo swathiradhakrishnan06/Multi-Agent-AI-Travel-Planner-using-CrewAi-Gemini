@@ -1,0 +1,22 @@
+agents:
+  - id: flight_planner
+    name: Flight Planner
+    description: >
+      Finds direct and one‑stop flight offers using Amadeus
+    tools:
+      - flight_search
+
+  - id: route_evaluator
+    name: Route Evaluator
+    description: >
+      Ranks flight options by cost and stopover experience value
+    tools:
+      - stopover_evaluator
+
+  - id: local_guide
+    name: Local Guide
+    description: >
+      Generates a 1–2 day itinerary in the stopover city using web search and scraping
+    tools:
+      - serper_api
+      - scrape_website

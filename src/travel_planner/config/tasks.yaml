@@ -1,0 +1,23 @@
+tasks:
+  - id: search_flights
+    description: >
+      Given {{ inputs.origin }}, {{ inputs.destination }}, {{ inputs.date }},
+      retrieve flight offers (direct & 1‑stop).
+    agent: flight_planner
+
+  - id: evaluate_routes
+    description: >
+      From search_flights output, rank routes by total price minus an experience bonus,
+      then select the top two.
+    agent: route_evaluator
+    context:
+      - search_flights
+
+  - id: plan_itinerary
+    description: >
+      For each chosen route with a stopover, produce a short 1–2 day
+      itinerary in the stopover city, tailored to {{ inputs.interests }}.
+    agent: local_guide
+    context:
+      - evaluate_routes
+    human_input: true
