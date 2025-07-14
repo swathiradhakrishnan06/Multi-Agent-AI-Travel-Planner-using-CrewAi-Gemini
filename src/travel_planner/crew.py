@@ -5,13 +5,12 @@ from .tools.stopover_evaluator import StopoverEvaluator
 from .tools.local_guide_tools import SerperApiToolWrapper, ScrapeWebsiteToolWrapper
 
 # Read your API key from the environment variable
-gemini_api_key = os.getenv("GEMINI_API_KEY", "AIzaSyCAKt9P9yjOtTqQMJc2VIyu03GydCq3W2M")
+gemini_api_key = os.getenv("GEMINI_API_KEY", "<YOUR-API-KEY>")
 
 # Use Gemini 1.5 Flash model (faster, different rate limits)
 gemini_llm = LLM(
     model='gemini/gemini-1.5-flash',
-    api_key=gemini_api_key,
-    temperature=0.0  # Lower temperature for more consistent results
+    api_key=gemini_api_key
 )
 
 # Instantiate tools
