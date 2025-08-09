@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 # Add the src directory to Python path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from travel_planner.main import crew
+from travel_planner.crew import crew
 
 # Page configuration
 st.set_page_config(
