@@ -88,9 +88,10 @@ Classic travel aggregators (like Skyscanner or Google Flights) focus on minimizi
 **Install dependencies:**
 ```bash
 pip install -r requirements.txt
-```
+````
 
 **.env file:**
+
 ```
 GEMINI_API_KEY=your_gemini_api_key
 AMADEUS_CLIENT_ID=your_amadeus_client_id
@@ -103,11 +104,13 @@ SERPER_API_KEY=your_serper_api_key
 ## Usage
 
 **Start the app:**
+
 ```bash
 streamlit run src/travel_planner/ui.py
 ```
 
 **How to use:**
+
 1. Enter your trip details and interests
 2. Click **Plan My Trip**
 3. Explore and compare both cost-effective and meaningful journey options
@@ -135,6 +138,7 @@ travel_planner/
 ├── requirements.txt
 ├── .env
 ├── ui-preview.png
+├── tests/                   # Unit and integration tests
 ├── test_improvements.py
 └── README.md
 ```
@@ -143,11 +147,62 @@ travel_planner/
 
 ## Technical Highlights
 
-- **Smart, modular agents** for each planning phase
-- **Custom tools** for flight search, scoring, web search, and scraping
-- **Interest-based route ranking** for meaningful journeys
-- **Fallback logic** ensures you always get a city guide, even if scraping fails
-- **Modern, responsive UI** with progress feedback and download options
+* **Smart, modular agents** for each planning phase
+* **Custom tools** for flight search, scoring, web search, and scraping
+* **Interest-based route ranking** for meaningful journeys
+* **Fallback logic** ensures you always get a city guide, even if scraping fails
+* **Modern, responsive UI** with progress feedback and download options
+
+---
+
+## Continuous Integration & Deployment (CI/CD)
+
+This project uses **GitHub Actions** for automated testing, packaging, and deployment.
+
+### Workflow: `.github/workflows/ci.yml`
+
+* **Triggers:** On push or pull request to `main`.
+* **Key steps:**
+
+  1. Checkout code
+  2. Set up Python 3.13 environment
+  3. Install dependencies from `requirements.txt`
+  4. Run tests via `pytest`
+  5. Deploy the app to Streamlit Cloud or AWS Lambda (Docker-based), configurable per branch
+  6. Provide build status feedback in GitHub
+
+---
+
+## Deployment
+
+### Streamlit Cloud
+
+* Simply connect this repo to [Streamlit Cloud](https://streamlit.io/cloud).
+* Set `src/travel_planner/ui.py` as the main entry point.
+* The app auto-installs dependencies from `requirements.txt`.
+* Note: Streamlit Cloud’s default environment might have SQLite version issues with ChromaDB. For production stability, use Docker deployment as outlined below.
+
+### AWS Lambda & Infrastructure (Optional)
+
+* Infrastructure-as-Code is provided under the `terraform/` folder.
+* Deploy the app in a Docker container on AWS Lambda, fronted by API Gateway and backed by RDS.
+* CI pipeline supports automated deployment on pushing to `main`.
+
+---
+
+## Testing
+
+* All tests reside under the `tests/` folder.
+
+* Run tests locally or in CI using:
+
+  ```bash
+  pytest tests/
+  ```
+
+* Includes unit tests for core logic and integration tests for API routes.
+
+* Test coverage reports are generated automatically in the CI workflow.
 
 ---
 
